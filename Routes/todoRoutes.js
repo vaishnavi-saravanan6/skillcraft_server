@@ -1,8 +1,10 @@
-import { addTodo ,getTodo,updateTodo,deleteTodo} from "../Controller/todoController.js";
+import { addTodo ,getTodo,updateTodo,deleteTodo,completeTodo} from "../Controller/todoController.js";
+import protect from "../Middleware/authMiddleware.js";
 import express from "express";
 const todoroute=express.Router();
-todoroute.post("/addtodo",addTodo);
-todoroute.get("/gettodo",getTodo);
-todoroute.put("/updatetodo/:id",updateTodo);
-todoroute.delete("/deletetodo/:id",deleteTodo);
+todoroute.post("/addtodo",protect,addTodo);
+todoroute.get("/gettodo",protect,getTodo);
+todoroute.put("/updatetodo/:id",protect,updateTodo);
+todoroute.delete("/deletetodo/:id",protect,deleteTodo);
+todoroute.put("/complete/:id", protect, completeTodo);
 export default todoroute;

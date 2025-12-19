@@ -1,12 +1,20 @@
-//define ur model schema
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-//todo document structure
-const todoSchema =  mongoose.Schema({
-    todo: { type: String, required: true, unique: true }
-})
+const todoSchema = mongoose.Schema({
+  todo: {
+    type: String,
+    required: true,
+  },
 
-//we r creating a collection named 'todos' using todoSchema
+  
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "skillCollection",   // your user collection
+    required: true,
+  },
+  completed: { type: Boolean, default: false },
+  completedAt: { type: Date }
+});
+
 const todoCollection = mongoose.model("todos", todoSchema);
-
 export default todoCollection;
